@@ -1,6 +1,8 @@
 package server
 
 import (
+	"fmt"
+
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -24,5 +26,8 @@ func StartServer() {
 	RouteGet(app)
 	RoutePost(app)
 
+	app.Server().MaxConnsPerIP = 1
 	app.Listen("localhost:80")
+	
+	fmt.Println(app.HandlersCount())
 }
